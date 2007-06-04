@@ -1,5 +1,6 @@
 %define	name	kradio
-%define pre	beta3b
+%define date	2006-11-12
+%define pre	r497
 %define	version 1.0 
 %define	release	%mkrel -c %{pre} 2 
 %define	Summary	A V4L/V4L2-Radio Application for KDE 3.x
@@ -11,10 +12,11 @@ Release:	%{release}
 Group:		Sound
 License:	GPL
 Url:		http://sourceforge.net/projects/kradio/
-Source0:	%{name}-%{version}%{pre}.tar.bz2
+Source0:	%{name}-snapshot-%{date}-%{pre}.tar.bz2
 Patch1:		kradio-1.0beta1-unblacklist-gcc.patch
 BuildRequires:	arts-devel kdelibs-devel libsndfile-devel qt3-devel
 BuildRequires:	jpeg-devel X11-devel
+BuildRequires:	unsermake
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -38,21 +40,18 @@ files for many cities around the world contributed by KRadio Users.
 As KRadio is based on an extendable plugin architecture.
 
 %prep
-%setup -q -n %{name}-%{version}%{pre}
-%patch1 -p1 -b .blacklist
-perl -pi -e 's#ACLOCAL="aclocal"#ACLOCAL="aclocal-1.9"#g' admin/detect-autoconf.sh
-touch kradio3/src/libkradio-gui/radiostationlistview.h
+%setup -q -n %{name}-snapshot-%{date}-%{pre}
+#%patch1 -p1 -b .blacklist
+#perl -pi -e 's#ACLOCAL="aclocal"#ACLOCAL="aclocal-1.9"#g' admin/detect-autoconf.sh
+#touch kradio3/src/libkradio-gui/radiostationlistview.h
 
 %build
-UNSERMAKE=no make -f Makefile.cvs
+#UNSERMAKE=no make -f Makefile.cvs
 %configure2_5x	--disable-rpath \
 		--enable-final \
-		--with-qt-dir=%{_prefix}/lib/qt3 \
-%if "%{_lib}" != "lib"
-		--enable-libsuffix="%(A=%{_lib}; echo ${A/lib/})"
-%endif
+		--with-qt-dir=%{qt3dir}
 
-%make
+/usr/share/unsermake/unsermake
  
 %install
 rm -rf %{buildroot}
