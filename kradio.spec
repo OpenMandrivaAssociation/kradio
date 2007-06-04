@@ -67,6 +67,8 @@ install -m644 kradio3/icons/hi32-app-kradio.png -D %{buildroot}%{_iconsdir}/%{na
 install -m644 kradio3/icons/hi16-app-kradio.png -D %{buildroot}%{_miconsdir}/%{name}.png
 
 desktop-file-install	--vendor="" \
+			--add-category="Audio" \
+			--add-category="Player" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications/kde $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
 
 %clean
