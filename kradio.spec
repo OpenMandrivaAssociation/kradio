@@ -2,7 +2,7 @@
 %define date	2006-11-12
 %define pre	r497
 %define	version 1.0 
-%define	release	%mkrel -c %{pre} 2 
+%define	release	%mkrel -c %{pre} 1 
 %define	Summary	A V4L/V4L2-Radio Application for KDE 3.x
 
 Summary:	%{Summary}
@@ -46,6 +46,7 @@ As KRadio is based on an extendable plugin architecture.
 #touch kradio3/src/libkradio-gui/radiostationlistview.h
 
 %build
+sed -i -e 's|/usr/src/unsermake|/usr/share/unsermake|' Makefile.in
 #UNSERMAKE=no make -f Makefile.cvs
 %configure2_5x	--disable-rpath \
 		--enable-final \
@@ -56,20 +57,18 @@ As KRadio is based on an extendable plugin architecture.
 %install
 rm -rf %{buildroot}
 
-%makeinstall_std
+/usr/share/unsermake/unsermake install DESTDIR=$RPM_BUILD_ROOT
 
 # rm dup docs
 rm -rf $RPM_BUILD_ROOT%{_docdir}/kradio
 
-install -m644 kradio3/src/hi48-app-kradio.png -D %{buildroot}%{_liconsdir}/%{name}.png
-install -m644 kradio3/src/hi32-app-kradio.png -D %{buildroot}%{_iconsdir}/%{name}.png
-install -m644 kradio3/src/hi16-app-kradio.png -D %{buildroot}%{_miconsdir}/%{name}.png
+install -m644 kradio3/icons/hi48-app-kradio.png -D %{buildroot}%{_liconsdir}/%{name}.png
+install -m644 kradio3/icons/hi32-app-kradio.png -D %{buildroot}%{_iconsdir}/%{name}.png
+install -m644 kradio3/icons/hi16-app-kradio.png -D %{buildroot}%{_miconsdir}/%{name}.png
 
 desktop-file-install	--vendor="" \
 			--add-category="X-MandrivaLinux-Multimedia-Sound" \
-			--dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
-
-%find_lang %{name}-%{version}%{pre}
+			--dir $RPM_BUILD_ROOT%{_datadir}/applications/kde $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
 
 %clean
 rm -rf %{buildroot}
@@ -80,17 +79,19 @@ rm -rf %{buildroot}
 %postun
 %{clean_menus}
  
-%files -f %{name}-%{version}%{pre}.lang
+%files
 %defattr(-,root,root)
 %doc kradio3/AUTHORS kradio3/ChangeLog kradio3/README kradio3/TODO
 %{_bindir}/convert-presets
 %{_bindir}/%{name}
 %{_libdir}/%{name}
-%{_datadir}/applications/*/%{name}.desktop
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/kde/%{name}.desktop
 %dir %{_datadir}/apps/%{name}
 %{_datadir}/apps/%{name}/*
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png 
-%{_iconsdir}/*/*/apps/*.png
+%{_liconsdir}/%{name}.png
+%lang(de) %{_datadir}/locale/de/LC_MESSAGES/*.mo
+%lang(es) %{_datadir}/locale/es/LC_MESSAGES/*.mo
+%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/*.mo
+%lang(ru) %{_datadir}/locale/ru/LC_MESSAGES/*.mo
