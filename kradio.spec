@@ -1,8 +1,7 @@
 %define	name	kradio
 %define pre	beta3b
 %define	version 1.0 
-%define	rel	0.%{pre}.1
-%define	release	%mkrel %{rel} 
+%define	release	%mkrel -c %{pre} 2 
 %define	Summary	A V4L/V4L2-Radio Application for KDE 3.x
 
 Summary:	%{Summary}
@@ -67,18 +66,6 @@ install -m644 kradio3/src/hi48-app-kradio.png -D %{buildroot}%{_liconsdir}/%{nam
 install -m644 kradio3/src/hi32-app-kradio.png -D %{buildroot}%{_iconsdir}/%{name}.png
 install -m644 kradio3/src/hi16-app-kradio.png -D %{buildroot}%{_miconsdir}/%{name}.png
 
-install -d %{buildroot}%{_menudir}
-cat > %{buildroot}%{_menudir}/%{name} << EOF
-?package(%{name}):\
-	command="%{name} -caption "%c" %i %m" \
-	icon="%{name}.png" \
-	title="Kradio" \
-	longtitle="%{Summary}" \
-	needs="x11" \
-	section="Multimedia/Sound" \
-	xdg="true"
-EOF
-
 desktop-file-install	--vendor="" \
 			--add-category="X-MandrivaLinux-Multimedia-Sound" \
 			--dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
@@ -104,7 +91,6 @@ rm -rf %{buildroot}
 %{_datadir}/applications/%{name}.desktop
 %dir %{_datadir}/apps/%{name}
 %{_datadir}/apps/%{name}/*
-%{_menudir}/%{name} 
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png 
