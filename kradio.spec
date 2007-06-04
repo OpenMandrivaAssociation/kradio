@@ -12,7 +12,7 @@ Group:		Sound
 License:	GPL
 Url:		http://sourceforge.net/projects/kradio/
 Source0:	%{name}-%{version}%{pre}.tar.bz2
-Patch1:		kradio-1.0beta1-unblacklist-gcc.patch.bz2
+Patch1:		kradio-1.0beta1-unblacklist-gcc.patch
 BuildRequires:	arts-devel kdelibs-devel libsndfile-devel qt3-devel
 BuildRequires:	jpeg-devel X11-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
