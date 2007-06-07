@@ -2,7 +2,7 @@
 %define date	2006-11-12
 %define pre	r497
 %define	version 1.0 
-%define	release	%mkrel -c %{pre} 1 
+%define	release	%mkrel -c %{pre} 2
 %define	Summary	A V4L/V4L2-Radio Application for KDE 3.x
 
 Summary:	%{Summary}
