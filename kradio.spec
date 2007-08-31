@@ -2,7 +2,7 @@
 %define date	2006-11-12
 %define pre	r497
 %define	version 1.0 
-%define	release	%mkrel -c %{pre} 2
+%define	release	%mkrel -c %{pre} 3
 %define	Summary	A V4L/V4L2-Radio Application for KDE 3.x
 
 Summary:	%{Summary}
@@ -14,6 +14,7 @@ License:	GPL
 Url:		http://sourceforge.net/projects/kradio/
 Source0:	%{name}-snapshot-%{date}-%{pre}.tar.bz2
 Patch1:		kradio-1.0beta1-unblacklist-gcc.patch
+Patch2:		kradio-fix-invalid-desktop.patch
 BuildRequires:	arts-devel kdelibs-devel libsndfile-devel qt3-devel
 BuildRequires:	jpeg-devel X11-devel
 BuildRequires:	unsermake
@@ -41,6 +42,7 @@ As KRadio is based on an extendable plugin architecture.
 
 %prep
 %setup -q -n %{name}-snapshot-%{date}-%{pre}
+%patch2 -p0
 #%patch1 -p1 -b .blacklist
 #perl -pi -e 's#ACLOCAL="aclocal"#ACLOCAL="aclocal-1.9"#g' admin/detect-autoconf.sh
 #touch kradio3/src/libkradio-gui/radiostationlistview.h
