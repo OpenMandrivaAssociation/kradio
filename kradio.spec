@@ -18,6 +18,7 @@ Patch2:		kradio-fix-invalid-desktop.patch
 BuildRequires:	arts-devel kdelibs-devel libsndfile-devel qt3-devel
 BuildRequires:	jpeg-devel X11-devel
 BuildRequires:	unsermake
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Comfortable Radio Application for KDE 3.x
