@@ -1,29 +1,31 @@
 %define	name	kradio
-%define date	2006-11-12
-%define pre	r497
-%define	version 1.0 
-%define	release	%mkrel -c %{pre} 3
-%define	Summary	A V4L/V4L2-Radio Application for KDE 3.x
+%define date	2009-02-08
+%define pre	r562
+%define	version 4.0.0
+%define	release	%mkrel -c %{pre} 1
+%define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
 
 Summary:	%{Summary}
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Group:		Sound
-License:	GPL
+License:	GPLv2+
 Url:		http://sourceforge.net/projects/kradio/
-Source0:	%{name}-snapshot-%{date}-%{pre}.tar.bz2
-Patch1:		kradio-1.0beta1-unblacklist-gcc.patch
+Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-snapshot-%{date}-%{pre}.tar.gz
 Patch2:		kradio-fix-invalid-desktop.patch
-BuildRequires:	arts-devel kdelibs-devel libsndfile-devel qt3-devel
-BuildRequires:	jpeg-devel X11-devel
-BuildRequires:	unsermake
+Patch3:		kradio4-install-desktop.patch
+BuildRequires:	kdelibs4-devel >= 2:4.1.83
+BuildRequires:	libsndfile-devel
+BuildRequires:	libalsa-devel
+BuildRequires:	lirc-devel
+BuildRequires:	oggvorbis-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
-Comfortable Radio Application for KDE 3.x
+Comfortable Radio Application for KDE 4.x
 
-KRadio is a comfortable radio application for KDE 3.x.
+KRadio is a comfortable radio application for KDE 4.x.
 It has support for V4L and V4L2 radio cards drivers.
 
 KRadio currently provides:
@@ -38,40 +40,20 @@ KRadio currently provides:
 This Package also includes a growing collection of station preset.
 files for many cities around the world contributed by KRadio Users.
 
-As KRadio is based on an extendable plugin architecture.
-
 %prep
-%setup -q -n %{name}-snapshot-%{date}-%{pre}
-%patch2 -p0
-#%patch1 -p1 -b .blacklist
-#perl -pi -e 's#ACLOCAL="aclocal"#ACLOCAL="aclocal-1.9"#g' admin/detect-autoconf.sh
-#touch kradio3/src/libkradio-gui/radiostationlistview.h
+%setup -q -n %{name}4-snapshot-%{date}-%{pre}
+%patch2 -p1 -b .xdg
+%patch3 -p1 -b .install
 
 %build
-sed -i -e 's|/usr/src/unsermake|/usr/share/unsermake|' Makefile.in
-#UNSERMAKE=no make -f Makefile.cvs
-%configure2_5x	--disable-rpath \
-		--enable-final \
-		--with-qt-dir=%{qt3dir}
-
-/usr/share/unsermake/unsermake
+%cmake_kde4
+%make
  
 %install
 rm -rf %{buildroot}
+%makeinstall_std -C build
 
-/usr/share/unsermake/unsermake install DESTDIR=$RPM_BUILD_ROOT
-
-# rm dup docs
-rm -rf $RPM_BUILD_ROOT%{_docdir}/kradio
-
-install -m644 kradio3/icons/hi48-app-kradio.png -D %{buildroot}%{_liconsdir}/%{name}.png
-install -m644 kradio3/icons/hi32-app-kradio.png -D %{buildroot}%{_iconsdir}/%{name}.png
-install -m644 kradio3/icons/hi16-app-kradio.png -D %{buildroot}%{_miconsdir}/%{name}.png
-
-desktop-file-install	--vendor="" \
-			--add-category="Audio" \
-			--add-category="Player" \
-			--dir $RPM_BUILD_ROOT%{_datadir}/applications/kde $RPM_BUILD_ROOT%{_datadir}/applications/kde/*
+%find_lang %name --all-name
 
 %clean
 rm -rf %{buildroot}
@@ -86,19 +68,11 @@ rm -rf %{buildroot}
 %{clean_menus}
 %endif
  
-%files
+%files -f %name.lang
 %defattr(-,root,root)
-%doc kradio3/AUTHORS kradio3/ChangeLog kradio3/README kradio3/TODO
-%{_bindir}/convert-presets
-%{_bindir}/%{name}
-%{_libdir}/%{name}
-%{_datadir}/applications/kde/%{name}.desktop
-%dir %{_datadir}/apps/%{name}
-%{_datadir}/apps/%{name}/*
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-%{_liconsdir}/%{name}.png
-%lang(de) %{_datadir}/locale/de/LC_MESSAGES/*.mo
-%lang(es) %{_datadir}/locale/es/LC_MESSAGES/*.mo
-%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/*.mo
-%lang(ru) %{_datadir}/locale/ru/LC_MESSAGES/*.mo
+%doc AUTHORS ChangeLog README TODO
+%{_kde_bindir}/*
+%{_kde_libdir}/%{name}
+%{_kde_datadir}/applications/kde4/*.desktop
+%{_kde_appsdir}/%{name}
+%{_kde_iconsdir}/*/*/*/*
