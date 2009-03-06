@@ -1,6 +1,6 @@
 %define	name	kradio
-%define date	2009-02-08
-%define pre	r562
+%define date	2009-03-05
+%define pre	r701
 %define	version 4.0.0
 %define	release	%mkrel -c %{pre} 1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
@@ -12,7 +12,7 @@ Release:	%{release}
 Group:		Sound
 License:	GPLv2+
 Url:		http://sourceforge.net/projects/kradio/
-Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-snapshot-%{date}-%{pre}.tar.gz
+Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-snapshot-%{date}-%{pre}.tar.bz2
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
 BuildRequires:	kdelibs4-devel >= 2:4.1.83
