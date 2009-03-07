@@ -15,9 +15,11 @@ Url:		http://sourceforge.net/projects/kradio/
 Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-snapshot-%{date}-%{pre}.tar.bz2
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
+Patch4:		kradio4-newer-ffmpeg.patch
 BuildRequires:	kdelibs4-devel >= 2:4.1.83
 BuildRequires:	libsndfile-devel
 BuildRequires:	libalsa-devel
+BuildRequires:	ffmpeg-devel
 BuildRequires:	lirc-devel
 BuildRequires:	oggvorbis-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -44,6 +46,7 @@ files for many cities around the world contributed by KRadio Users.
 %setup -q -n %{name}4-snapshot-%{date}-%{pre}
 %patch2 -p1 -b .xdg
 %patch3 -p1 -b .install
+%patch4 -p0 -b .ffmpeg
 
 %build
 %cmake_kde4
@@ -72,7 +75,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog README TODO
 %{_kde_bindir}/*
-%{_kde_libdir}/%{name}
+%{_kde_libdir}/%{name}4
 %{_kde_datadir}/applications/kde4/*.desktop
-%{_kde_appsdir}/%{name}
+%{_kde_appsdir}/%{name}4
 %{_kde_iconsdir}/*/*/*/*
