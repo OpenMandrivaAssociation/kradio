@@ -1,6 +1,6 @@
 %define	name	kradio
-%define date	2009-03-07
-%define pre	r723
+%define date	2009-03-18
+%define pre	r775
 %define	version 4.0.0
 %define	release	%mkrel -c %{pre} 1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
@@ -15,11 +15,11 @@ Url:		http://sourceforge.net/projects/kradio/
 Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-snapshot-%{date}-%{pre}.tar.bz2
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
-Patch4:		kradio4-newer-ffmpeg.patch
 BuildRequires:	kdelibs4-devel >= 2:4.1.83
 BuildRequires:	libsndfile-devel
 BuildRequires:	libalsa-devel
 BuildRequires:	ffmpeg-devel
+BuildRequires:	libmms-devel
 BuildRequires:	lirc-devel
 BuildRequires:	oggvorbis-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -46,7 +46,6 @@ files for many cities around the world contributed by KRadio Users.
 %setup -q -n %{name}4-snapshot-%{date}-%{pre}
 %patch2 -p1 -b .xdg
 %patch3 -p1 -b .install
-%patch4 -p0 -b .ffmpeg
 
 %build
 %cmake_kde4
