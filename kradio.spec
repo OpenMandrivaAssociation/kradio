@@ -1,6 +1,6 @@
 %define	name	kradio
-%define date	2009-03-18
-%define pre	r775
+%define date	2009-03-22
+%define pre	r778
 %define	version 4.0.0
 %define	release	%mkrel -c %{pre} 1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
