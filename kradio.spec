@@ -1,6 +1,6 @@
 %define	name	kradio
 %define date	2009-03-22
-%define pre	r778
+%define pre	rc1
 %define	version 4.0.0
 %define	release	%mkrel -c %{pre} 1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
@@ -12,7 +12,7 @@ Release:	%{release}
 Group:		Sound
 License:	GPLv2+
 Url:		http://sourceforge.net/projects/kradio/
-Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-snapshot-%{date}-%{pre}.tar.bz2
+Source0:	http://www.nocabal.de/~emw/kradio/download/%{name}4-%{version}-%{pre}.tar.bz2
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
 BuildRequires:	kdelibs4-devel >= 2:4.1.83
@@ -43,7 +43,7 @@ This Package also includes a growing collection of station preset.
 files for many cities around the world contributed by KRadio Users.
 
 %prep
-%setup -q -n %{name}4-snapshot-%{date}-%{pre}
+%setup -q -n %{name}4-%{version}-%{pre}
 %patch2 -p1 -b .xdg
 %patch3 -p1 -b .install
 
@@ -54,6 +54,8 @@ files for many cities around the world contributed by KRadio Users.
 %install
 rm -rf %{buildroot}
 %makeinstall_std -C build
+
+rm -f %buildroot%_datadir/doc/*
 
 %find_lang %name --all-name
 
