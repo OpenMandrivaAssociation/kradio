@@ -55,7 +55,7 @@ files for many cities around the world contributed by KRadio Users.
 rm -rf %{buildroot}
 %makeinstall_std -C build
 
-rm -f %buildroot%_datadir/doc/*
+rm -fr %buildroot%_datadir/doc/*
 
 %find_lang %name --all-name
 
