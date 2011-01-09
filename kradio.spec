@@ -1,5 +1,5 @@
 %define	name	kradio
-%define	version 4.0.1
+%define	version 4.0.2
 %define	release	%mkrel 1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
 
