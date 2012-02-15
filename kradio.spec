@@ -1,6 +1,6 @@
 %define	name	kradio
-%define	version 4.0.2
-%define	release	%mkrel 1
+%define	version 4.0.3
+%define	release	1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
 
 Summary:	%{Summary}
@@ -20,7 +20,6 @@ BuildRequires:	ffmpeg-devel
 BuildRequires:	libmms-devel
 BuildRequires:	lirc-devel
 BuildRequires:	oggvorbis-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Comfortable Radio Application for KDE 4.x
@@ -50,28 +49,13 @@ files for many cities around the world contributed by KRadio Users.
 %make
  
 %install
-rm -rf %{buildroot}
 %makeinstall_std -C build
 
 rm -fr %buildroot%_datadir/doc/*
 
 %find_lang %name --all-name
-
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%endif
-
-%if %mdkversion < 200900
-%postun
-%{clean_menus}
-%endif
  
 %files -f %name.lang
-%defattr(-,root,root)
 %doc AUTHORS ChangeLog README TODO
 %{_kde_bindir}/*
 %{_kde_libdir}/%{name}4
