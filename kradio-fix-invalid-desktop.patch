@@ -1,0 +1,18 @@
+--- kradio4-snapshot-2009-02-08-r562/src/kradio.desktop.xdg	2009-02-08 20:27:01.000000000 +0100
++++ kradio4-snapshot-2009-02-08-r562/src/kradio.desktop	2009-02-09 05:17:52.000000000 +0100
+@@ -1,13 +1,10 @@
+ # KDE Config File  
+ [Desktop Entry]
+-Encoding=UTF-8
+ Type=Application
+ Exec=kradio -caption "%c" %i %m  
+-Icon=kradio.png
++Icon=kradio
+ DocPath=kradio/index.html
+-Comment=
+-Comment[de]=
+ Terminal=false
+ Name=KRadio
+ Name[de]=KRadio
+-Categories=Qt;KDE;AudioVideo;
++Categories=Qt;KDE;AudioVideo;Audio;Player;
