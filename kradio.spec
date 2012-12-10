@@ -1,5 +1,5 @@
 %define	name	kradio
-%define	version 4.0.4
+%define	version 4.0.6
 %define	release	1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
 
@@ -14,12 +14,13 @@ Source0:	http://freefr.dl.sourceforge.net/sourceforge/kradio/%{name}4-%{version}
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
 BuildRequires:	kdelibs4-devel >= 2:4.1.83
-BuildRequires:	libsndfile-devel
-BuildRequires:	libalsa-devel
+BuildRequires:	pkgconfig(sndfile)
+BuildRequires:	pkgconfig(alsa)
 BuildRequires:	ffmpeg-devel
-BuildRequires:	libmms-devel
+BuildRequires:	pkgconfig(libmms)
 BuildRequires:	lirc-devel
 BuildRequires:	oggvorbis-devel
+BuildRequires:  boost-devel
 
 %description
 Comfortable Radio Application for KDE 4.x
@@ -52,6 +53,7 @@ files for many cities around the world contributed by KRadio Users.
 %makeinstall_std -C build
 
 rm -fr %buildroot%_datadir/doc/*
+rm -fr %buildroot%{_kde_datadir}/applications/kde4/kradio.desktop
 
 %find_lang %name --all-name
  
@@ -59,7 +61,8 @@ rm -fr %buildroot%_datadir/doc/*
 %doc AUTHORS ChangeLog README TODO
 %{_kde_bindir}/*
 %{_kde_libdir}/%{name}4
-%{_kde_datadir}/applications/kde4/*.desktop
+%{_kde_datadir}/applications/kde4/kradio4.desktop
 %{_kde_datadir}/pixmaps/kradio4.png
 %{_kde_appsdir}/%{name}4
 %{_kde_iconsdir}/*/*/*/*
+
