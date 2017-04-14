@@ -1,6 +1,6 @@
 %define	name	kradio
-%define	version 4.0.6
-%define release	2
+%define	version 4.0.8
+%define release	1
 %define	Summary	A V4L/V4L2-Radio Application for KDE 4.x
 
 Summary:	%{Summary}
@@ -19,7 +19,7 @@ BuildRequires:	pkgconfig(alsa)
 BuildRequires:	ffmpeg-devel
 BuildRequires:	pkgconfig(libmms)
 BuildRequires:	lirc-devel
-BuildRequires:	oggvorbis-devel
+BuildRequires:	libvorbis-devel
 BuildRequires:  boost-devel
 
 %description
