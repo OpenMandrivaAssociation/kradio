@@ -9,7 +9,7 @@ Version:	%{version}
 Release:	%{release}
 Group:		Sound
 License:	GPLv2+
-Url:		http://sourceforge.net/projects/kradio/
+Url:		https://sourceforge.net/projects/kradio/
 Source0:	http://freefr.dl.sourceforge.net/sourceforge/kradio/%{name}4-%{version}.tar.bz2
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
