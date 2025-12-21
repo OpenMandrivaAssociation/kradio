@@ -13,6 +13,7 @@ Url:		https://sourceforge.net/projects/kradio/
 Source0:	http://freefr.dl.sourceforge.net/sourceforge/kradio/%{name}4-%{version}.tar.bz2
 Patch2:		kradio-fix-invalid-desktop.patch
 Patch3:		kradio4-install-desktop.patch
+BuildRequires:	make
 BuildRequires:	kdelibs4-devel >= 2:4.1.83
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(alsa)
